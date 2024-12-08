@@ -1,0 +1,39 @@
+services:
+  app:
+    build: ./backendminiapp/
+    ports:
+      - "3009:3009"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/test
+    depends_on:
+      - mongo
+    networks:
+      - miniapp_miniapp-network # Changed to the correct network name
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+      - ./dump:/dump
+    networks:
+      - miniapp_miniapp-network # Changed to the correct network name
+
+  frontend:
+    build: ./frontendadminminiapp/
+    environment:
+      - API_URL=http://localhost:3009
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app
+    networks:
+      - miniapp_miniapp-network # Changed to the correct network name
+
+volumes:
+  mongo-data:
+
+networks:
+  miniapp_miniapp-network: # Changed to the correct network name
+    driver: bridge
