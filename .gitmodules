@@ -1,0 +1,6 @@
+[submodule "backendminiapp"]
+    path = backendminiapp
+    url = https://github.com/giahy26052004/backendminiapp.git
+[submodule "frontendadminminiapp"]
+    path = frontendadminminiapp
+    url = https://github.com/giahy26052004/frontendadminminiapp.git
